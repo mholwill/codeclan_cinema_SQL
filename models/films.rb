@@ -37,7 +37,30 @@ class Film
   end
 
 
+  def delete
+    sql = "DELETE FROM films WHERE id = $1"
+    value = [@id]
+    SqlRunner.run(sql, value)
+  end
 
+
+  def self.all()
+    sql = "SELECT * FROM films"
+    films = SqlRunner.run(sql)
+    return Film.map_items(films)
+  end
+
+  def self.delete_all
+    sql = "DELETE FROM films"
+    SqlRunner.run(sql)
+  end
+
+
+#refactoring code for enumeration
+  def self.map_items(films_data)
+    result = films_data.map {|film| Film.new(film)}
+    return result
+  end
 
 
 
