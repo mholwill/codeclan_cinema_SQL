@@ -63,6 +63,7 @@ class Customer
   def decrease_funds(film)
     self.funds -= film.price
     return self.funds
+    self.update
   end
 
   def self.all()
